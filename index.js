@@ -1,10 +1,23 @@
 const express = require('express')
 const app = express()
+const mtg = require('mtgsdk')
+
+app.get('/cards', (req, res, next) => {
+  mtg.card.all({ name: req.query.name, pageSize: 1 })
+  .on('data', card => {
+    return res.json(card)
+  })
+})
 
 app.get('*', (req, res) => {
-    res.write('<h1><marquee direction=right>Hello from Express path `/` on Now 2.0!</marquee></h1>')
-    res.write('<h2>Go to <a href="/about">/about</a></h2>')
-    res.end()
+  return res.json({
+    health: 'OK'
+  })
+})
+
+
+app.listen(3000, () => {
+  console.log('Listening on 3000')
 })
 
 module.exports = app

@@ -8,5 +8,8 @@
   },
   "scripts": {
     "start": "node ."
+  },
+  "devDependencies": {
+    "mtgsdk": "^0.4.2"
   }
 }
